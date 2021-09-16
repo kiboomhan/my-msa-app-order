@@ -1,0 +1,22 @@
+# Use root/example as user/password credentials
+version: '3.8'
+
+services:
+
+  db:
+    container_name: msaapporder-mariadb
+    image: mariadb
+#    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test1234
+      MYSQL_DATABASE: my_db
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./msaapporder-mariadb/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+#    expose:
+#      - 3306
+
+volumes:
+  db-data:
